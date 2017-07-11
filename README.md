@@ -3,11 +3,15 @@ A library to help with functional programming style in C#.
 
 ## why?
 
-There are already a number of libraries for doing functional programming in C#. Some of these even include persistent data types such as the standard List. However, my main interest was in exploring the potentials and shortcomings of C# as a language for doing strongly typed functional programming. More on that soon.
+There are already a number of libraries for doing functional programming in C#. Some of these even include persistent data types such as the standard List. However, my main interest was in exploring the potentials and shortcomings of C# as a language for doing strongly typed functional programming.
+
+The combination of generics and lambda syntax for functions provide the basis for a reasonable amount of functional style programming. The new ValueTuple syntax is also helpful, although it would be nicer if they were immutable.
+
+The biggest limitation is the lack of support for Higher Kinded Types (HKTs). Without this support it is not possible to abstract over concepts such as Monoid, Functor or Monad. So, not only must each data type re-implement all of the relevant methods, but it is not possible to have a function accept a Functor or Monad as a parameter. The real limitation here is the inability to have return type polymorphism. This can be seen in LINQ, where `List<int> {1, 2, 3}.Select(i => i + 1);` returns an `IEnumerable<int>` instead of a `List<int>`. This is workable for the limited scope of collections, but can't be generalized to more abstract types.
 
 ## what?
 
-A library containing some data types and helper functions. The style of this library was heavily influenced by [Typelevel Cats](http://typelevel.org/cats), which in turn was based on [Scalaz](https://github.com/scalaz/scalaz).
+A library containing some data types and helper functions. The style of this library was heavily influenced by [Typelevel Cats](http://typelevel.org/cats), which in turn was based on [Scalaz](https://github.com/scalaz/scalaz). It is written as a Portable Class Library, so should be useable in most .NET projects.
 
 #### Data Types
 * `Option<A>` - A "container" datatype that holds either a value of type A or nothing. This is similar to the nullable data types in C#, such as int?, but can also be used for reference types. It can be used instead of null and has the advantage that null cannot be tracked by the type system, but Option can. There are helper methods for converting nulls, handling functions that may return nulls, parsing strings, etc.
