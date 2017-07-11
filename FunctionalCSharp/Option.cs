@@ -182,5 +182,29 @@ namespace FunctionalCSharp
             }
             return newList.toOption();
         }
+
+        // Convert a string to an Option<int>.
+        // If you need to diagnose the error, consider toIntE() on Either.
+        public static Option<int> toInt(this string s)
+        {
+            int i;
+            if (int.TryParse(s, out i))
+            {
+                return i.some();
+            }
+            return Option<int>.none();
+        }
+
+        // Convert a string to an Option<double>.
+        // If yuou need to diagnose the error, consinder toDoubleE() on Either.
+        public static Option<double> toDouble(this string s)
+        {
+            double d;
+            if (double.TryParse(s, out d))
+            {
+                return d.some();
+            }
+            return Option<double>.none();
+        }
     }
 }

@@ -157,7 +157,11 @@ namespace FunctionalCSharp
             return catchOnly<A, B, C, D, Z, Exception>(f);
         }
 
-        public static Either<Exception, int> toInt(this string s) {
+        /// <summary>
+        /// Converts a string into an int, capturing any exception.
+        /// Unless you need the exception, consider using toInt() on Option.
+        /// </summary>
+        public static Either<Exception, int> toIntE(this string s) {
             try {
                 return int.Parse(s).right<Exception, int>();
             }
@@ -166,7 +170,11 @@ namespace FunctionalCSharp
             }
         }
 
-        public static Either<Exception, double> toDouble(this string s)
+        /// <summary>
+        /// Converts a string into a double, capturing any exception.
+        /// Unless you need the exception, consider using toDouble() on Option.
+        /// </summary>
+        public static Either<Exception, double> toDoubleE(this string s)
         {
             try
             {
